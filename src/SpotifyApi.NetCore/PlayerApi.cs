@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace SpotifyApi.NetCore
 {
@@ -410,6 +411,12 @@ namespace SpotifyApi.NetCore
             string url = $"{BaseUrl}/me/player";
             if (!string.IsNullOrEmpty(market)) url += $"?market={market}";
             return await GetModel<T>(url, accessToken);
+        }
+
+        public async Task TransferCurrentPlayback(bool play, string deviceId, string accessToken = null){
+            string url = $"{BaseUrl}/me/player";
+            dynamic data = JObject.FromObject(new { play = play, device_ids = new List<string>{deviceId} });
+            await Put(url, data, accessToken);
         }
 
         #endregion

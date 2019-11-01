@@ -301,6 +301,8 @@ namespace SpotifyApi.NetCore
         /// </remarks>
         Task<CurrentPlaybackContext> GetCurrentPlaybackInfo(string accessToken = null, string market = null);
 
+        Task TransferCurrentPlayback(bool play, string accessToken = null, string deviceId = null);
+
         /// <summary>
         /// BETA. Get information about the user’s current playback state, including track, track progress, and active device.
         /// </summary>
